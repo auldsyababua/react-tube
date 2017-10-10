@@ -9,7 +9,14 @@ import VideoListItem from './video_list_item'
 //in the return, you are instanitating a VideoListItem and passing it the currently iterated video object as a prop called 'video' 
 const VideoList = (props) => {
   const videoItems = props.videos.map ((currentVideo) => {
-    return <VideoListItem key={currentVideo.etag} video={currentVideo}/>
+    return (
+      //VideoList takes the prop onVideoSelect and passes it as a prop for VideoListItem
+      //from its parent to its child.
+      <VideoListItem 
+        onVideoSelect = {props.onVideoSelect}
+        key={currentVideo.etag} 
+        video={currentVideo}/>
+    );
   });
 
   //Line 18 we are referencing the videoItems array returned on line 12 to return the list items
