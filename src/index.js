@@ -46,7 +46,7 @@ class App extends Component {
       <div>
         <SearchBar
           //When SearchBar calls onSearchTermChange it will do so with the search 
-          //term string passed into the videoSearch method 
+          //term string passed into the videoSearch method, and send as props to SearchBar 
           onSearchTermChange={term =>this.videoSearch(term)}/>
         <VideoDetail 
           video={this.state.selectedVideo} />
