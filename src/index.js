@@ -1,5 +1,6 @@
 //Go get react and react-dom from the modules
 import React, { Component } from 'react';
+import _ from 'lodash';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
 import SearchBar from './components/search_bar';
@@ -42,12 +43,16 @@ class App extends Component {
   //Everytime App re-renders, VideoList will get the new videos from state.
   
   render () {
+    //fat-arrow function passed to debounce, and returns new version of 
+    //the videoSearch function from above so it can only be called every 300ms
+    const videoSearch = _.debounce((term) => {this.videoSearch(term) }, 300);
+
     return (
       <div>
         <SearchBar
           //When SearchBar calls onSearchTermChange it will do so with the search 
           //term string passed into the videoSearch method, and send as props to SearchBar 
-          onSearchTermChange={term =>this.videoSearch(term)}/>
+          onSearchTermChange={videoSearch}/>
         <VideoDetail 
           video={this.state.selectedVideo} />
         <VideoList
